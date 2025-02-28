@@ -18,7 +18,7 @@ export default function Home() {
         <button
           onClick={() => router.push("/dashboard")}
           className="mt-6 px-6 py-3 text-lg bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
-        >
+        > 
           Get Started
         </button>
       </section>
