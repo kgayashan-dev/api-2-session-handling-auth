@@ -1,3 +1,5 @@
+// app/login/actions.ts
+
 "use server";
 
 import { z } from "zod";
@@ -38,11 +40,9 @@ export async function login(prevState: any, formData: FormData) {
     };
   }
 
-  await createSession(testUser.id);
-
+  await createSession(testUser.id, testUser.role); // Pass the role here
   redirect("/dashboard");
 }
-
 export async function logout() {
   await deleteSession();
   redirect("/login");
