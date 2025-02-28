@@ -1,5 +1,5 @@
-import { signup } from '@/app/actions/auth'
- 
+import { signup } from "@/app/actions/auth";
+
 export function SignupForm() {
   return (
     <form action={signup}>
@@ -17,5 +17,5 @@ export function SignupForm() {
       </div>
       <button type="submit">Sign Up</button>
     </form>
-  )
+  );
 }
