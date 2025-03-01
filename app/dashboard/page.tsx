@@ -7,7 +7,7 @@ export default async function Dashboard() {
   const session = await getSession();
   const role = session?.role || "unknown"; // Default to "unknown" if no role is found
 
-  console.log("Session in Dashboard:", session); // Debugging
+//   console.log("Session in Dashboard:", session); // Debugging
 
   if (role === "admin") {
     return <AdminDashboard role={role} />;

@@ -12,11 +12,9 @@ type SessionPayload = {
 };
 export async function createSession(userId: string, role: string) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
-  const session = await new SignJWT({ userId, role })
-    .setProtectedHeader({ alg: "HS256" })
-    .setIssuedAt()
-    .setExpirationTime("7d")
-    .sign(encodedKey);
+  const session = await encrypt({ userId, role, expiresAt });
+
+  // console.log("Created session token:", session); // Debugging
 
   (await cookies()).set("session", session, {
     httpOnly: true,
@@ -26,6 +24,7 @@ export async function createSession(userId: string, role: string) {
     path: "/",
   });
 }
+
 
 export async function deleteSession() {
   (await cookies()).delete("session");
@@ -47,20 +46,37 @@ export async function getSession() {
 }
 
 export async function encrypt(payload: SessionPayload) {
-  return new SignJWT(payload)
-    .setProtectedHeader({ alg: "HS256" })
-    .setIssuedAt()
-    .setExpirationTime("7d")
-    .sign(encodedKey);
+  try {
+    const token = await new SignJWT(payload)
+      .setProtectedHeader({ alg: "HS256" })
+      .setIssuedAt()
+      .setExpirationTime("7d")
+      .sign(encodedKey);
+
+    // console.log("Generated JWT:", token); // Debugging
+    return token;
+  } catch (error) {
+    console.error("Error encrypting session:", error);
+    throw new Error("Session encryption failed.");
+  }
 }
 
 export async function decrypt(session: string | undefined = "") {
+  if (!session) {
+    console.error("Session cookie is empty or undefined.");
+    return null;
+  }
+
   try {
+    // console.log("Session cookie:", session); // Debugging
     const { payload } = await jwtVerify(session, encodedKey, {
       algorithms: ["HS256"],
     });
+
+    // console.log("Decrypted session payload:", payload); // Debugging
     return payload;
   } catch (error) {
-    console.log(error, "Failed to verify session");
+    console.error("Failed to verify session:", error);
+    return null;
   }
 }
