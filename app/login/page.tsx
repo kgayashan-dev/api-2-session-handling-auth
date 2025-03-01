@@ -1,12 +1,12 @@
-import React from 'react'
-import { LoginForm } from './LoginComponent'
+import React from "react";
+import { LoginForm } from "./LoginComponent";
 
 const page = () => {
   return (
     <div>
-        <LoginForm/>
+      <LoginForm />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

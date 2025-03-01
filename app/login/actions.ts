@@ -43,6 +43,60 @@ export async function login(prevState: any, formData: FormData) {
   await createSession(testUser.id, testUser.role); // Pass the role here
   redirect("/dashboard");
 }
+// export async function login(prevState: any, formData: FormData) {
+//     const result = loginSchema.safeParse(Object.fromEntries(formData));
+  
+//     if (!result.success) {
+//       return {
+//         errors: result.error.flatten().fieldErrors,
+//       };
+//     }
+  
+//     const { email, password } = result.data;
+  
+//     try {
+//       // Call the backend API to validate credentials
+//       const response = await fetch("http://localhost:3000/api/login", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ email, password }),
+//       });
+  
+//       if (!response.ok) {
+//         const errorData = await response.json();
+//         return {
+//           errors: {
+//             email: [errorData.message || "Invalid email or password"],
+//           },
+//         };
+//       }
+  
+//       // Extract user data from the response
+//       const user = await response.json();
+  
+//       // Create a session with the user data
+//       await createSession(user.id, user.role);
+  
+//       // Redirect to the dashboard
+//       redirect("/dashboard");
+//     } catch (error) {
+//       console.error("Login error:", error);
+//       return {
+//         errors: {
+//           email: ["An error occurred. Please try again."],
+//         },
+//       };
+//     }
+//   }
+  
+
+
+
+
+
+
+
+
 export async function logout() {
   await deleteSession();
   redirect("/login");

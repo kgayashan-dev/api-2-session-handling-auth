@@ -1,5 +1,3 @@
-// middleware.ts
-
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { decrypt } from "./app/lib/session";
