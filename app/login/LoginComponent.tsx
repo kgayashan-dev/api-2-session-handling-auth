@@ -17,20 +17,20 @@ export function LoginForm() {
         <form action={loginAction} className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <label
-              htmlFor="email"
+              htmlFor="username"
               className="text-sm font-medium text-gray-700"
             >
-              Email Address
+              Username
             </label>
             <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="your@email.com"
+              id="username"
+              name="username"
+              type="text"
+              placeholder="Enter your username"
               className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
-            {state?.errors?.email && (
-              <p className="text-red-500 text-sm mt-1">{state.errors.email}</p>
+            {state?.errors?.username && (
+              <p className="text-red-500 text-sm mt-1">{state.errors.username}</p>
             )}
           </div>
 

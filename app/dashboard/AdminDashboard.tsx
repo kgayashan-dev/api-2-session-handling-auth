@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import { logout } from "../login/actions";
+import { logout } from "../login/actionss";
 
 interface AdminDashboardProps {
   role: string;

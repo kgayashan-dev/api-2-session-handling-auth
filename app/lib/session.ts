@@ -25,7 +25,6 @@ export async function createSession(userId: string, role: string) {
   });
 }
 
-
 export async function deleteSession() {
   (await cookies()).delete("session");
 }
@@ -53,14 +52,13 @@ export async function encrypt(payload: SessionPayload) {
       .setExpirationTime("7d")
       .sign(encodedKey);
 
-    // console.log("Generated JWT:", token); // Debugging
+    console.log("Generated JWT:", token); // Debugging
     return token;
   } catch (error) {
     console.error("Error encrypting session:", error);
     throw new Error("Session encryption failed.");
   }
 }
-
 export async function decrypt(session: string | undefined = "") {
   if (!session) {
     console.error("Session cookie is empty or undefined.");
