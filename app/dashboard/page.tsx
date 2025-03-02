@@ -9,13 +9,12 @@ export default async function Dashboard() {
   const session = await getSession();
   const role = session?.role || "unknown"; // Default to "unknown" if no role is found
 
-  // Debugging: Log the session and role
-  console.log("Session in Dashboard:", session);
-  console.log("Role in Dashboard:", role);
+
 
   // Redirect to /login if no valid session or role is found
   if (!session || role === "unknown") {
     redirect("/login");
+   
   }
 
   if (role === "Admin") {
