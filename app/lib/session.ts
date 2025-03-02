@@ -3,6 +3,7 @@ import "server-only";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
+
 const secretKey = process.env.NEXTAUTH_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);
 type SessionPayload = {
@@ -62,6 +63,7 @@ export async function encrypt(payload: SessionPayload) {
 export async function decrypt(session: string | undefined = "") {
   if (!session) {
     console.error("Session cookie is empty or undefined.");
+
     return null;
   }
 

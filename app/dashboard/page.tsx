@@ -1,7 +1,9 @@
+// app/dashboard/page.tsx
+
 import { getSession } from "../lib/session";
 import AdminDashboard from "./AdminDashboard";
 import UserDashboard from "./UserDashboard";
-import { redirect } from "next/navigation"; // Import redirect
+import { redirect } from "next/navigation";
 
 export default async function Dashboard() {
   const session = await getSession();
@@ -16,13 +18,11 @@ export default async function Dashboard() {
     redirect("/login");
   }
 
-  // Render the appropriate dashboard based on the role
-  if (role === "admin") {
+  if (role === "Admin") {
     return <AdminDashboard role={role} />;
-  } else if (role === "user") {
+  } else if (role === "User") {
     return <UserDashboard role={role} />;
   }
 
-  // Fallback: Redirect to /login if the role is not recognized
-  redirect("/login");
+  redirect("/login"); // Fallback for unknown roles
 }
