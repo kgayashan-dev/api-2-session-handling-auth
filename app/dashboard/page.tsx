@@ -22,6 +22,7 @@ export default async function Dashboard() {
   } else if (role === "User") {
     return <UserDashboard role={role} />;
   }
+  
 
   redirect("/login"); // Fallback for unknown roles
 }

@@ -14,7 +14,7 @@ interface Car {
   make: string;
   model: string;
 }
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const EmployeesAndCars2 = () => {
   // States for employees
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -36,7 +36,7 @@ const EmployeesAndCars2 = () => {
   const fetchEmployees = async () => {
     setLoadingEmployees(true);
     try {
-      const response = await fetch("http://localhost:5246/api/employees");
+      const response = await fetch(`${API_URL}/api/employees`);
       if (!response.ok) throw new Error("Failed to fetch employees");
       const data: Employee[] = await response.json();
       setEmployees(data);
@@ -53,7 +53,7 @@ const EmployeesAndCars2 = () => {
   const fetchCars = async () => {
     setLoadingCars(true);
     try {
-      const response = await fetch("http://localhost:5246/api/cars");
+      const response = await fetch(`${API_URL}/api/cars`);
       if (!response.ok) throw new Error("Failed to fetch cars");
       const data: Car[] = await response.json();
       setCars(data);
@@ -120,7 +120,7 @@ const EmployeesAndCars2 = () => {
       if (editingEmployee) {
         // Update existing employee
         response = await fetch(
-          `http://localhost:5246/api/employees/${editingEmployee.id}`,
+          `${API_URL}/api/employees/${editingEmployee.id}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -129,7 +129,7 @@ const EmployeesAndCars2 = () => {
         );
       } else {
         // Add new employee
-        response = await fetch("http://localhost:5246/api/employees", {
+        response = await fetch(`${API_URL}/api/employees`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(employeeData),
@@ -182,7 +182,7 @@ const EmployeesAndCars2 = () => {
       if (editingCar) {
         // Update existing car
         response = await fetch(
-          `http://localhost:5246/api/cars/${editingCar.id}`,
+          `${API_URL}/api/cars/${editingCar.id}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -191,7 +191,7 @@ const EmployeesAndCars2 = () => {
         );
       } else {
         // Add new car
-        response = await fetch("http://localhost:5246/api/cars", {
+        response = await fetch(`${API_URL}/api/cars`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(carData),
@@ -224,7 +224,7 @@ const EmployeesAndCars2 = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5246/api/employees/${id}`,
+        `${API_URL}/api/employees/${id}`,
         {
           method: "DELETE",
         }
@@ -250,7 +250,7 @@ const EmployeesAndCars2 = () => {
     if (!confirm("Are you sure you want to delete this car?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5246/api/cars/${id}`, {
+      const response = await fetch(`${API_URL}/api/cars/${id}`, {
         method: "DELETE",
       });
 

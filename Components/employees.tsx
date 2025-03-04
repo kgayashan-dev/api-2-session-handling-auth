@@ -15,6 +15,10 @@ interface Car {
   model: string;
 }
 
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+
 const EmployeesAndCars = () => {
   // States for employees
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -34,7 +38,7 @@ const EmployeesAndCars = () => {
   const fetchEmployees = async () => {
     setLoadingEmployees(true);
     try {
-      const response = await fetch("http://localhost:5246/api/employees");
+      const response = await fetch(`${API_URL}/api/employees`);
       if (!response.ok) throw new Error("Failed to fetch employees");
       const data: Employee[] = await response.json();
       setEmployees(data);

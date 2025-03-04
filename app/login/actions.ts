@@ -6,6 +6,7 @@ import { z } from "zod";
 import { createSession, deleteSession } from "../lib/session";
 import { redirect } from "next/navigation";
 
+
 type LoginState = {
   errors?: {
     username?: string[];
@@ -14,6 +15,8 @@ type LoginState = {
   success?: boolean;
   redirectTo?: string;
 };
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const loginSchema = z.object({
   username: z.string().min(1, { message: "Username is required" }).trim(),
@@ -33,7 +36,7 @@ export async function login(prevState: LoginState, formData: FormData) {
   const { username, password } = result.data;
 
   try {
-    const response = await fetch("http://localhost:5246/api/users/login", {
+    const response = await fetch(`${API_URL}/api/users/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
